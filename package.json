@@ -1,0 +1,18 @@
+{
+  "name": "desolation-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server-run": " cd server && npm start ",
+    "server-build": " cd server && npm install ",
+    "client-run": " cd server && npm start ",
+    "client-build": " cd client && npm install && npm run build "
+  },
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "18.x"
+  }
+ 
+}
