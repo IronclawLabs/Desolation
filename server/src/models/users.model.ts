@@ -1,23 +1,16 @@
 import { AccountType } from "@sharedtypes/enums"
 import mongoose from "mongoose"
 const Users = new mongoose.Schema({
-    discord_id: {
-        type: String,
+    token_balance: {
+        type: Number,
         required: true,
-        unique: true,
-        index:true
+        default: 0
     },
     account_type: {
         type: Number,
         required: true,
         enum: AccountType,
         default: AccountType.user
-    },
-    discord_user: {
-        required: true,
-        type: mongoose.Schema.Types.Mixed,
-        default: {},
-
     },
     is_active: {
         type: Boolean,

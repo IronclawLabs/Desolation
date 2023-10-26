@@ -17,6 +17,7 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 import authRoute from "./routes/auth.route";
 import adminRoute from "./routes/admin.route";
 import publicRoute from "./routes/public.route";
+import paymentRoute from "./routes/payment.route";
 import './strategies/discordStrategy.strategy';
 //middleware import
 import isAuthorized from './middleware/isAuthorized.middleware';
@@ -87,6 +88,7 @@ const main = () => {
   // Middleware Routes
   app.use('/auth', authRoute);
   app.use('/public',publicRoute);
+  app.use('/payment',paymentRoute);
   app.use('/admin', isAuthorized, isValid, isActive, isAdmin, adminRoute);
   
   server.listen(PORT, () => {

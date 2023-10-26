@@ -18,7 +18,8 @@
         "@services/*": ["./src/services/*"],
         "@basetypes/*": ["./src/types/*"],
         "@sharedtypes/*": ["../types/*"],
-        "@models/*":["./src/models/*"]
+        "@models/*":["./src/models/*"],
+        "@utils/*":["./src/utils/*"],
         },
         "baseUrl": ".",
     },

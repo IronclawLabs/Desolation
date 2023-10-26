@@ -4,17 +4,8 @@ import { Document, Types } from 'mongoose';
 
 // DB MODELS
 export interface DbUser extends Document {
-  discord_id: string;
-  owned_creatures:Types.ObjectId[];
+  token_balance: number;
   account_type: AccountType;
-  su_amount:number;
-  rewards:Types.ObjectId;
-  bio:string
-  socials:{[key in Socials]:string}
-  discord_user:DiscordUser
-  is_profile_visible:boolean;
-  current_cult_discord_id:string;
-  collected_lp:number
   is_active: boolean;
 }  
 
@@ -27,5 +18,14 @@ export interface DbUser extends Document {
     mfa_enabled:boolean;
     access_token:string
   } 
+
+export interface postValidateTokenPaymentBody{
+  tx_signature:string
+}
+
+export interface postResponse{
+  message:ResponseMessage
+  permission:boolean
+}
 
  

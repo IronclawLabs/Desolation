@@ -5,6 +5,9 @@ export enum AccountType {
   admin
 }
 
+export enum PaymentType {
+  basic
+}
 export const CultTypeText = {
   0:"Basic"
   
@@ -39,6 +42,9 @@ export enum ResponseMessage {
   wentWrong = "Something went wrong",
   successful = "Successfully completed",
   alreadyCompleted = "Already completed",
+
+  //payments
+  paymentValidated = "Payment validated successfully",
 
   //su buy/sell
   creatureSold = "Creature sold successfully. You will recive you funds in short time. Transaction id of your funds: ",

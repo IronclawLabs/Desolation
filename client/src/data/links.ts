@@ -13,6 +13,10 @@ const links = {
   logout: `${domain()}/auth/logout`,
   get_db_user:`${domain()}/user`,
 
+
+  //payment
+  post_validate_payment:`${domain()}/payment/validate`,
+
   
   //in-site
   gameboard:"/profile/gameboard",
