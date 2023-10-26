@@ -27,7 +27,7 @@
         "./types/**/*.d.ts",
         "src/**/*",
         "../types/myTypes.d.ts",
-        "../types/enums.ts"  ],
+        "../types/enums.ts", "src/controllers/payment/.ts"  ],
        
         
 }

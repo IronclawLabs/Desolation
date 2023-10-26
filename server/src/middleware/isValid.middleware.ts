@@ -7,13 +7,6 @@ const admins = ["415570551004725248","922494670871855104"]
 
 const isValid = async (req:ExtendedRequest,res:Response,next:NextFunction) =>{
     try {
-        let user = req.user as DbUser
-        if(!user) throw new Error(ResponseMessage.noCookieUser);
-
-        let dbUser = await usersModel.findOne({discord_id:user.discord_id}) as DbUser
-        if(!dbUser) throw new Error (ResponseMessage.userNotExist)
-        if(!admins.includes(dbUser.discord_id)) throw new Error
-        req.dbUser = dbUser
         next()
         
     }catch (error) {

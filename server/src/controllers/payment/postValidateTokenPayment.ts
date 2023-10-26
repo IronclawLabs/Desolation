@@ -17,13 +17,13 @@ export const postValidateTokenPayment = async (req: ExtendedRequest, res: Respon
         if(!txData) throw new Error("Invalid signature");
 
         if(!isPaymentValid(txData)) throw new Error("Invalid payment");
-        paymentsModel.create({payment_signature:tx_signature})
+        //paymentsModel.create({payment_signature:tx_signature})
         
         //perform payment result
         
-        await dbUser.save()
+        //await dbUser.save()
         const resBody = {message:ResponseMessage.paymentValidated,permission:true} as postResponse
-        res.status(200).send(resBody)
+        res.status(200).send(txData)
 
     } catch (error) {
         console.log(error);
