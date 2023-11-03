@@ -20,7 +20,8 @@ export interface DbUser extends Document {
   } 
 
 export interface postValidateTokenPaymentBody{
-  tx_signature:string
+  tx_signature:string,
+  tx_sender:string
 }
 
 export interface postResponse{

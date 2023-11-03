@@ -5,18 +5,23 @@ import { postResponse, postValidateTokenPaymentBody } from "@sharedtypes/myTypes
 import { Response, Request } from "express";
 import isPaymentValid from "@utils/isPaymentValid.util";
 import paymentsModel from "@models/payments.model";
+import getGivenTokenBalance from "@utils/getGivenTokenBalance.util";
 
 
 
 export const postValidateTokenPayment = async (req: ExtendedRequest, res: Response) => {
     try {
       
-        const {tx_signature} = req.body as postValidateTokenPaymentBody
+        const {tx_signature,tx_sender} = req.body as postValidateTokenPaymentBody
         const dbUser = req.dbUser;
+        
         const txData = await fetchTxSignature(tx_signature);
         if(!txData) throw new Error("Invalid signature");
-
-        if(!isPaymentValid(txData)) throw new Error("Invalid payment");
+        
+        if(!isPaymentValid(txData,tx_sender)) throw new Error("Invalid payment");
+        const givenTokenBalance =  await getGivenTokenBalance(txData);
+        //is given token balance allowed?
+        
         //paymentsModel.create({payment_signature:tx_signature})
         
         //perform payment result

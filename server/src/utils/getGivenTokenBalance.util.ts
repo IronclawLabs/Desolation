@@ -1,28 +1,22 @@
 import { ConfirmedTransactionMeta, TokenBalance, TransactionResponse } from "@solana/web3.js";
 
-const isPaymentValid =  (transaction: TransactionResponse,tx_sender:String):Boolean => {
-
-  transaction.meta.postTokenBalances.forEach((el:TokenBalance)=>{
-    if(el.mint != process.env.TOKEN_MINT) throw new Error("Invalid Token Mint")
-    if(el.accountIndex == 2){
-      if(el.owner != tx_sender) throw new Error("Invalid Sender")
-    }
-    if(el.accountIndex == 1){
-      if(el.owner != process.env.TOKEN_VAULT) throw new Error("Invalid Vault")
+const getGivenTokenBalance =  (transaction: TransactionResponse):Number => {
+    let preBalance = 0;
+    let postBalance = 0;
+  transaction.meta.preTokenBalances.forEach((el:TokenBalance)=>{
+    if(el.accountIndex == 1 && el.mint == process.env.TOKEN_MINT && el.owner == process.env.TOKEN_VAULT){
+        preBalance = el.uiTokenAmount.uiAmount
     }
   })
   
-  transaction.meta.preTokenBalances.forEach((el:TokenBalance)=>{
-    if(el.mint != process.env.TOKEN_MINT) throw new Error("Invalid Token Mint")
-    if(el.accountIndex == 2){
-      if(el.owner != tx_sender) throw new Error("Invalid Sender")
+  transaction.meta.postTokenBalances.forEach((el:TokenBalance)=>{
+    if(el.accountIndex == 1 && el.mint == process.env.TOKEN_MINT && el.owner == process.env.TOKEN_VAULT){
+        postBalance = el.uiTokenAmount.uiAmount
     }
-    if(el.accountIndex == 1){
-      if(el.owner != process.env.TOKEN_VAULT) throw new Error("Invalid Vault")
-    }  })
-
-return true
-
+    })
+    if(postBalance < preBalance) throw new Error("Something went wrong")
+return postBalance - preBalance
+}
             
 /*
 { 
@@ -260,6 +254,4 @@ return true
 }*/
 
 
-};
-
-export default isPaymentValid
+export default getGivenTokenBalance
