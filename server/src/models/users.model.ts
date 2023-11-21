@@ -12,6 +12,28 @@ const Users = new mongoose.Schema({
         enum: AccountType,
         default: AccountType.user
     },
+    wallet_id:{
+        type: String,
+        required: true,
+        unique:true,
+    },
+    total_withdrawn: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    total_spent: {
+        type: Number,
+        required: true,
+        default: 0
+    
+    },
+    balance_table_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Balances',
+        default: null,
+    
+    },
     is_active: {
         type: Boolean,
         required: true,
