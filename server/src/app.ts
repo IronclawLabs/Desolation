@@ -18,7 +18,9 @@ import authRoute from "./routes/auth.route";
 import adminRoute from "./routes/admin.route";
 import publicRoute from "./routes/public.route";
 import paymentRoute from "./routes/payment.route";
+import userRoute from "./routes/user.route";
 import './strategies/discordStrategy.strategy';
+import './strategies/userJwtStrategy.strategy';
 //middleware import
 import isAuthorized from './middleware/isAuthorized.middleware';
 import isAdmin from './middleware/isAdmin.middleware';
@@ -28,6 +30,7 @@ import http from "http"
 import helmet from 'helmet';
 import eventEmitter from './eventEmitter';
 import sendSol from './utils/sendSol';
+import isUser from '@middleware/isUser.middleware';
 
 
 
@@ -58,20 +61,7 @@ const main = () => {
 
 
 
-  app.use(session({
-
-    secret: process.env.SEED,
-    cookie: {
-      maxAge: 60000 * 60 ,
-      domain: process.env.COOKIE_DOMAIN,
-      httpOnly: true
-    },
-    saveUninitialized: true,
-    resave: false,
-    name: "discord.oauth2",
-  }));
-
-
+ 
   // Passport
   app.use(passport.initialize());
   app.use(passport.session());
@@ -89,6 +79,7 @@ const main = () => {
   app.use('/auth', authRoute);
   app.use('/public',publicRoute);
   app.use('/payment',paymentRoute);
+  app.use('/user',isAuthorized,isUser,isActive,userRoute);
   app.use('/admin', isAuthorized, isValid, isActive, isAdmin, adminRoute);
   
   server.listen(PORT, () => {

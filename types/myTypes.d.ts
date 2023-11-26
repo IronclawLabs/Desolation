@@ -24,6 +24,12 @@ export interface postValidateTokenPaymentBody{
   tx_sender:string
 }
 
+
+export interface postCreateUserBody{
+  wallet_id:ResponseMessage
+}
+
+
 export interface postResponse{
   message:ResponseMessage
   permission:boolean

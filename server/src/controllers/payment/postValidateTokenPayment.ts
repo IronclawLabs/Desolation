@@ -22,7 +22,7 @@ export const postValidateTokenPayment = async (req: ExtendedRequest, res: Respon
         const givenTokenBalance =  await getGivenTokenBalance(txData);
         //is given token balance allowed?
         
-        //paymentsModel.create({payment_signature:tx_signature})
+        paymentsModel.create({payment_signature:tx_signature})
         
         //perform payment result
         
