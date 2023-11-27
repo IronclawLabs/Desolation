@@ -1,4 +1,5 @@
-import { postCreateUser } from "./postCreateUser"
+import { putCreateUser } from "./putCreateUser"
+import { getUser } from "./getUser"
 
 
 
@@ -7,5 +8,6 @@ import { postCreateUser } from "./postCreateUser"
 
 
 export default {
-    postCreateUser,
+    putCreateUser,
+    getUser,
 }

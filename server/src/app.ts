@@ -79,7 +79,7 @@ const main = () => {
   app.use('/auth', authRoute);
   app.use('/public',publicRoute);
   app.use('/payment',paymentRoute);
-  app.use('/user',isAuthorized,isUser,isActive,userRoute);
+  app.use('/user',userRoute);//middlewares are insde
   app.use('/admin', isAuthorized, isValid, isActive, isAdmin, adminRoute);
   
   server.listen(PORT, () => {

@@ -25,7 +25,7 @@ export interface postValidateTokenPaymentBody{
 }
 
 
-export interface postCreateUserBody{
+export interface putCreateUserBody{
   wallet_id:ResponseMessage
 }
 
@@ -34,5 +34,4 @@ export interface postResponse{
   message:ResponseMessage
   permission:boolean
 }
-
  

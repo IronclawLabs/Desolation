@@ -4,6 +4,7 @@ import './globals.css'
 import { WalletProvider } from '@solana/wallet-adapter-react'
 import { SolWallet } from '../context/SolWallet'
 import { UIProvider } from '@/context/UIProvider'
+import { UserProvider } from '@/context/UserProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,8 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <SolWallet>
           <UIProvider>
-            
+            <UserProvider>
             {children}
+            </UserProvider>
           </UIProvider>
         </SolWallet>
       </body>

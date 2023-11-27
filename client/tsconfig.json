@@ -6,9 +6,10 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -28,7 +29,6 @@
       "@data/*":["./src/data/*"]
       
     },
-    
   },
   
   "include": ["../types/**/*.d.ts","next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts",
