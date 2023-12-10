@@ -26,7 +26,7 @@ export const postValidateTokenPayment = async (req: ExtendedRequest, res: Respon
         
         //perform payment result
         
-        //await dbUser.save()
+        await dbUser.save()
         const resBody = {message:ResponseMessage.paymentValidated,permission:true} as postResponse
         res.status(200).send(txData)
 

@@ -11,9 +11,9 @@ export default function Home() {
       <Heading>sdfsd</Heading>
     <WalletButton></WalletButton>
       <Button onClick={async ()=>{
-         //const a = await putCreateUser("dsas");
-         //Cookies.set('user_jwt', token, { expires: 1 });
-        //console.log(a);
+        //  const a = await putCreateUser("dsas");
+        //  Cookies.set('user_jwt', token, { expires: 1 });
+        // console.log(a);
         
       }}></Button>
       </VStack>

@@ -19,6 +19,7 @@ export interface DbUser extends Document {
     access_token:string
   } 
 
+
 export interface postValidateTokenPaymentBody{
   tx_signature:string,
   tx_sender:string
