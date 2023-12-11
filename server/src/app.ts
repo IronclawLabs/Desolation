@@ -31,6 +31,7 @@ import helmet from 'helmet';
 import eventEmitter from './eventEmitter';
 import sendSol from './utils/sendSol';
 import isUser from '@middleware/isUser.middleware';
+import startWorker from '@workers/startWorker.worker';
 
 
 
@@ -81,6 +82,7 @@ const main = () => {
   app.use('/payment',paymentRoute);
   app.use('/user',userRoute); //middlewares are insde
   app.use('/admin', isAuthorized, isValid, isActive, isAdmin, adminRoute);
+  startWorker();
   
   server.listen(PORT, () => {
     console.log(`Now listening to requests on port ${PORT}`)

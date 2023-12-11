@@ -17,7 +17,16 @@ const Missions = new mongoose.Schema({
         ref: 'Users',
         default: null,
     },
-       
+    participants: {
+        type: Map,
+        of: [{
+          wallet: {
+            type: String,
+          },
+          values: [String],
+        }],
+        default: new Map(),
+      },
     ends_at: {
         type: Date,
         required:true

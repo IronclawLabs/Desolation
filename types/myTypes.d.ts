@@ -7,6 +7,7 @@ export interface DbUser extends Document {
   token_balance: number;
   account_type: AccountType;
   is_active: boolean;
+  wallet_address: string;
 }  
 
 
@@ -17,6 +18,18 @@ export interface DbUser extends Document {
     avatar: string;
     mfa_enabled:boolean;
     access_token:string
+  } 
+
+  export interface DbMission extends Document {
+    token_balance: number;
+  type_id: number;
+  owner_id: Types.ObjectId | null;
+  participants: Map<String, String[]>;
+  ends_at: Date;
+  started_at: Date;
+  nft_id: Types.ObjectId;
+  location_id: number;
+  is_active: boolean;
   } 
 
 

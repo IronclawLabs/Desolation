@@ -20,6 +20,7 @@
         "@sharedtypes/*": ["../types/*"],
         "@models/*":["./src/models/*"],
         "@utils/*":["./src/utils/*"],
+        "@workers/*":["./src/workers/*"],
         },
         "baseUrl": ".",
     },

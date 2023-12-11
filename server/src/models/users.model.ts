@@ -12,7 +12,7 @@ const Users = new mongoose.Schema({
         enum: AccountType,
         default: AccountType.user
     },
-    wallet_id:{
+    wallet_address:{
         type: String,
         required: true,
         unique:true,
