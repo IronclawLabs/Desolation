@@ -35,9 +35,10 @@ const Missions = new mongoose.Schema({
         type: Date,
         default: Date.now
       },
-    nft_id:{
+    starter_nft_id:{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
+        ref: 'Nfts',
 
     },
     location_id:{

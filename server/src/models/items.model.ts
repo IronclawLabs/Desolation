@@ -14,12 +14,24 @@ token_balance: {
         type:Number,
         required: true,
     },
-    item_owner_id:{
+    owner_id:{
 
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Nfts',
+        ref: 'Users',
         required: true,
     },
+    mint_address: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    holder_nft_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Nfts',
+        default: null,
+    
+    },
+
     skill_id:{
         type: Number,
         required: true,
