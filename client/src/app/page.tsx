@@ -8,6 +8,8 @@ import {useEffect, useState} from "react"
 import {help} from "tailwindcss/src/oxide/cli/help"
 import _ from "lodash"
 import Loading from "@components/loading"
+import Navs from "@components/navs"
+import MenuItem from "@components/MenuItem"
 
 
 const zones = [
@@ -43,6 +45,16 @@ const zones = [
   },
 
   {
+    image: require("@assets/zone-6.png").default.src,
+
+    left: "58.83%",
+    top: "6.8%",
+    width: "41%",
+    height: "auto"
+
+  },
+
+  {
     image: require("@assets/zone-5.png").default.src,
 
     left: "58.2%",
@@ -63,15 +75,6 @@ const zones = [
 
   },
 
-  {
-    image: require("@assets/zone-6.png").default.src,
-
-    left: "58.83%",
-    top: "6.8%",
-    width: "41%",
-    height: "auto"
-
-  },
 
   {
     image: require("@assets/zone-7.png").default.src,
@@ -149,10 +152,14 @@ export default function Home() {
       const elements = document.elementsFromPoint(x, y)
       const filteredElements = elements.filter(el => el.classList.contains('zone'))
 
-      filteredElements.forEach(el => {
+      if (filteredElements.length === 0) setHoverIndex(-1)
+      for (let el of filteredElements) {
         const rect = el.getBoundingClientRect()
-        if (!detectTransparency(el as HTMLImageElement, x - rect.left, y - rect.top)) setHoverIndex(+el.id)
-      })
+        if (!detectTransparency(el as HTMLImageElement, x - rect.left, y - rect.top)) {
+          setHoverIndex(+el.id)
+          break
+        }
+      }
     })
 
 
@@ -160,18 +167,34 @@ export default function Home() {
 
   return (
     <VStack>
-      {isLoading && <Loading></Loading>}
+      <Loading isLoading={isLoading}></Loading>
       <VStack>
         <Heading>sdfsd</Heading>
         <WalletButton></WalletButton>
 
       </VStack>
-      <Box display={"flex"} w={1900} h={970} className={"bg-cover bg-center relative items-center justify-center"}
+      <Box display={"flex"} w={1900} h={970} className={"bg-cover bg-center relative justify-center"}
            backgroundImage={`url("${require("@assets/bg.png").default.src}")`}>
-        {
-          zones.map((zone, index) => <Zone key={index} index={index} isHover={hoverIndex === index} zone={zone}/>)
-        }
+        <div className={"w-[70%] h-[70%] scale-[1] translate-y-[50px]  relative flex items-center justify-center"}>
+          {
+            zones.map((zone, index) => <Zone key={index} index={index} isHover={hoverIndex === index} zone={zone}/>)
+          }
+
+          <div className={"absolute top-[73%]"}>
+            <Navs/>
+          </div>
+        </div>
+
+
+        <div className={"flex justify-center items-end fixed bottom-0 w-full gap-[10px]"}>
+
+
+          <MenuItem label={"social"} image={require("@assets/menu1.png").default.src}/>
+          <MenuItem label={"characters"} image={require("@assets/menu2.png").default.src}/>
+          <MenuItem label={"inventory"} image={require("@assets/menu3.png").default.src}/>
+          <MenuItem label={"leadeboard"} image={require("@assets/menu4.png").default.src}/>
+        </div>
       </Box>
     </VStack>
-  )
+)
 }

@@ -1,9 +1,7 @@
+export default function Loading({isLoading}: any) {
 
 
-export default function Loading () {
-
-
-  return <div className="container">
+  return <div className={"container transition-all " + (!isLoading ? " opacity-0 pointer-events-none" : "")}>
     <div className="row">
       <div className="col dark">
         <div className="loader">
