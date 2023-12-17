@@ -260,10 +260,10 @@ export default function Home() {
         <div className={"flex justify-center items-end fixed bottom-0 w-full gap-[10px]"}>
 
 
-          <MenuItem label={"social"} image={require("@assets/menu1.png").default.src}/>
-          <MenuItem label={"characters"} image={require("@assets/menu2.png").default.src}/>
-          <MenuItem label={"inventory"} image={require("@assets/menu3.png").default.src}/>
-          <MenuItem label={"leadeboard"} image={require("@assets/menu4.png").default.src}/>
+          <MenuItem label={"User Profile"} image={require("@assets/characters.png").default.src}/>
+          <MenuItem label={"characters"} image={require("@assets/inventory.png").default.src}/>
+          <MenuItem label={"inventory"} image={require("@assets/leaderboard.png").default.src}/>
+          <MenuItem label={"game documents"} image={require("@assets/social.png").default.src}/>
         </div>
         <div className={"fixed bottom-[30px] left-[30px]"}>
           <div id="side-panel" className={"ui panel !h-[300px] mb-[30px] " + (menuVisible ? " " : "hide ")}>
