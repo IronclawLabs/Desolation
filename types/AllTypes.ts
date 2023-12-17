@@ -5,4 +5,7 @@ export interface Zone {
   top: string,
   width: string,
   height: string,
+  transform: string,
+  lineStyle: any
+
 }

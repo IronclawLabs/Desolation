@@ -10,6 +10,7 @@ import _ from "lodash"
 import Loading from "@components/loading"
 import Navs from "@components/navs"
 import MenuItem from "@components/MenuItem"
+import {useWallet} from "@solana/wallet-adapter-react"
 
 
 const zones = [
@@ -19,7 +20,15 @@ const zones = [
     left: "15.5%",
     top: "45.6%",
     width: "23%",
-    height: "auto"
+    height: "auto",
+    transform: "rotate3d(0,1,1,-10deg) skewX(-7deg) translateY(-210%) translateX(-200%)",
+    lineStyle: {
+      borderRight: "1px solid #ffffffaa",
+      borderTop: "1px solid #ffffffaa",
+      width: "100%",
+      height: "40%",
+      transform: "rotate3d(0,1,1,-10deg) skewX(-7deg) translateY(-230%) translateX(-66.5%)",
+    }
 
   },
 
@@ -29,7 +38,15 @@ const zones = [
     left: "20.5%",
     top: "58.2%",
     width: "26.2%",
-    height: "auto"
+    height: "auto",
+    transform: "rotate3d(0,1,1,-6deg) skewX(-4deg) translateY(-145%) translateX(-100%)",
+    lineStyle: {
+      borderRight: "1px solid #ffffffaa",
+      borderTop: "1px solid #ffffffaa",
+      width: "40%",
+      height: "20%",
+      transform: "rotate3d(0,1,1,-6deg) skewX(-4deg) translateY(-220%) translateX(-2%)",
+    }
 
   },
 
@@ -40,7 +57,8 @@ const zones = [
     left: "40.33%",
     top: "64.2%",
     width: "15.5%",
-    height: "auto"
+    height: "auto",
+    transform: "translateY(-130px) translateX(0px)"
 
   },
 
@@ -50,7 +68,15 @@ const zones = [
     left: "58.83%",
     top: "6.8%",
     width: "41%",
-    height: "auto"
+    height: "auto",
+    transform: "rotate3d(0,1,1,10deg) skewX(7deg) translateY(-340%) translateX(265%)",
+    lineStyle: {
+      borderLeft: "1px solid #ffffffaa",
+      borderTop: "1px solid #ffffffaa",
+      width: "35%",
+      height: "65%",
+      transform: "rotate3d(0,1,1,10deg) skewX(7deg) translateY(-150%) translateX(176%)",
+    }
 
   },
 
@@ -60,7 +86,15 @@ const zones = [
     left: "58.2%",
     top: "37.8%",
     width: "24%",
-    height: "auto"
+    height: "auto",
+    transform: "rotate3d(0,1,1,10deg) skewX(7deg)  translateY(-310%) translateX(270%)",
+    lineStyle: {
+      borderLeft: "1px solid #ffffffaa",
+      borderTop: "1px solid #ffffffaa",
+      width: "95%",
+      height: "35%",
+      transform: "rotate3d(0,1,1,10deg) skewX(7deg) translateY(-250%) translateX(77.5%)",
+    }
 
   },
 
@@ -71,7 +105,15 @@ const zones = [
     left: "51.53%",
     top: "58.8%",
     width: "27.5%",
-    height: "auto"
+    height: "auto",
+    transform: "rotate3d(0,1,1,6deg) skewX(4deg) translateY(-150%) translateX(200%)",
+    lineStyle: {
+      borderLeft: "1px solid #ffffffaa",
+      borderTop: "1px solid #ffffffaa",
+      width: "65%",
+      height: "20%",
+      transform: "rotate3d(0,1,1,6deg) skewX(4deg) translateY(-220%) translateX(68.5%)",
+    }
 
   },
 
@@ -82,7 +124,16 @@ const zones = [
     left: "24.83%",
     top: "-2.2%",
     width: "48%",
-    height: "auto"
+    height: "auto",
+    transform: "translateY(-315%) translateX(200%)",
+    lineStyle: {
+      borderLeft: "1px solid #ffffffaa",
+      borderTop: "1px solid #ffffffaa",
+      width: "30%",
+      height: "45%",
+      transform: "rotate3d(0, 1, 1, -12deg) skewX(-9deg) translateY(-151%) translateX(111.5%)",
+    }
+
 
   },
 
@@ -92,7 +143,15 @@ const zones = [
     left: "0%",
     top: "7.8%",
     width: "36%",
-    height: "auto"
+    height: "auto",
+    transform: "rotate3d(0,1,1,-10deg) skewX(-7deg)  translateY(-230%) translateX(-92%)",
+    lineStyle: {
+      borderRight: "1px solid #ffffffaa",
+      borderTop: "1px solid #ffffffaa",
+      width: "40%",
+      height: "45%",
+      transform: "rotate3d(0, 1, 1, -10deg) skewX(-7deg) translateY(-152%) translateX(7%)",
+    }
 
   },
 
@@ -102,7 +161,15 @@ const zones = [
     left: "35%",
     top: "33.8%",
     width: "29%",
-    height: "auto"
+    height: "auto",
+    transform: "translateY(-445%) translateX(-120%)",
+    lineStyle: {
+      borderLeft: "1px solid #ffffffaa",
+      borderBottom: "1px solid #ffffffaa",
+      width: "75%",
+      height: "45%",
+      transform: "rotate3d(0, 1, 1, 23deg) skewX(16deg) translateY(-249%) translateX(-59.5%)",
+    }
 
   },
 
@@ -117,6 +184,10 @@ const zones = [
 
 export default function Home() {
   const [hoverIndex, setHoverIndex] = useState(-1)
+  const [menuVisible, setMenuVisible] = useState(false)
+  const [chatVisible, setChatVisible] = useState(false)
+  const {publicKey, connected, signIn} = useWallet()
+
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -145,7 +216,7 @@ export default function Home() {
       return !(alpha > 0)
     }
 
-    document.addEventListener('mousemove', (event) => {
+    document.addEventListener('mousemove', _.throttle((event) => {
       const x = event.clientX
       const y = event.clientY
 
@@ -160,7 +231,7 @@ export default function Home() {
           break
         }
       }
-    })
+    }, 50))
 
 
   }, [])
@@ -194,7 +265,114 @@ export default function Home() {
           <MenuItem label={"inventory"} image={require("@assets/menu3.png").default.src}/>
           <MenuItem label={"leadeboard"} image={require("@assets/menu4.png").default.src}/>
         </div>
+        <div className={"fixed bottom-[30px] left-[30px]"}>
+          <div id="side-panel" className={"ui panel !h-[300px] mb-[30px] " + (menuVisible ? " " : "hide ")}>
+            <div className="content">
+              <div className={""}>
+                Profile
+              </div>
+              <div className={""}>
+                Asset Manager
+              </div>
+              <div className={""}>
+                Connect Socials
+              </div>
+              <div className={""}>
+                Log Out
+              </div>
+
+            </div>
+          </div>
+
+
+          <div onClick={() => {
+            setMenuVisible(prev => !prev)
+          }} className={"cursor-pointer flex gap-[20px] items-center justify-center"}>
+            <img className={"w-[70px] h-[70px] bg-[#5865F2] rounded-full"}
+                 src={require("@assets/profile.png").default.src}/>
+            <div className={"ui panel orbitron gap-[10px] p-[10px]"}>
+              <div className={"content"}>
+                <div>Wallet</div>
+                <div className={"font-[12px]"}>{publicKey && (publicKey.toString().substring(0, 20) + "...")}</div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div className={"fixed bottom-[30px] right-[30px] w-[400px]"}>
+          <div id="side-panel" className={"ui panel !h-[300px] mb-[30px] " + (chatVisible ? " " : "hide ")}>
+            <div className="content">
+              <div className={"flex items-center gap-[20px]"}>
+                <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
+                     src={require("@assets/profile.png").default.src}/>
+                <div className={"flex flex-col gap-[5px]"}>
+                  <div>
+                    Foreson
+                  </div>
+                  <div className={"text-[12px] text-[#fff]"}>
+                    LOREM IPSUM LOREM IPSUM LOREM
+                  </div>
+                </div>
+              </div>
+
+              <div className={"flex items-center gap-[20px]"}>
+                <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
+                     src={require("@assets/profile.png").default.src}/>
+                <div className={"flex flex-col gap-[5px]"}>
+                  <div>
+                    Foreson
+                  </div>
+                  <div className={"text-[12px] text-[#fff]"}>
+                    LOREM IPSUM LOREM IPSUM LOREM
+                  </div>
+                </div>
+              </div>
+
+              <div className={"flex items-center gap-[20px]"}>
+                <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
+                     src={require("@assets/profile.png").default.src}/>
+                <div className={"flex flex-col gap-[5px]"}>
+                  <div>
+                    Foreson
+                  </div>
+                  <div className={"text-[12px] text-[#fff]"}>
+                    LOREM IPSUM LOREM IPSUM LOREM
+                  </div>
+                </div>
+              </div>
+
+              <div className={"flex items-center gap-[20px]"}>
+                <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
+                     src={require("@assets/profile.png").default.src}/>
+                <div className={"flex flex-col gap-[5px]"}>
+                  <div>
+                    Foreson
+                  </div>
+                  <div className={"text-[12px] text-[#fff]"}>
+                    LOREM IPSUM LOREM IPSUM LOREM
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div onClick={() => {
+            setChatVisible(prev => !prev)
+          }} className={"cursor-pointer flex gap-[20px] items-center justify-center"}>
+            <div className={"ui panel orbitron gap-[10px] p-[10px]"}>
+              <div className={"content"}>
+                <div>Chat</div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
       </Box>
     </VStack>
-)
+  )
 }
