@@ -240,7 +240,6 @@ export default function Home() {
     <VStack>
       <Loading isLoading={isLoading}></Loading>
       <VStack>
-        <Heading>sdfsd</Heading>
         <WalletButton></WalletButton>
 
       </VStack>

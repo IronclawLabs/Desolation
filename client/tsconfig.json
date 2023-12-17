@@ -26,8 +26,9 @@
       "@sharedtypes/*": ["../types/*"],
       "@public/*": ["./public/*"],
       "@assets/*":["./assets/*"],
-      "@data/*":["./src/data/*"]
-      
+      "@data/*":["./src/data/*"],
+      "@styles/*":["./styles/*"]
+
     },
   },
   

@@ -1,0 +1,64 @@
+/* The Modal (background) */
+.loginLightbox {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.head{
+  color: #2bf5bc;
+}
+
+/* Modal Content */
+.modalContent {
+  position: relative;
+  background-color: rgba(6, 18, 14, 0.66);
+  border: 1px solid #2bf5bc;
+  border-radius: 5px;
+  margin: auto;
+  min-width: 320px;
+  //width: 400px;
+  padding: 10px 0 20px 0;
+  top: -80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* CSS */
+.connectButton {
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,
+  rgba(44, 187, 99, .15) 0 1px 2px,
+  rgba(44, 187, 99, .15) 0 2px 4px,
+  rgba(44, 187, 99, .15) 0 4px 8px,
+  rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 200ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.connectButton:hover {
+  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+}
