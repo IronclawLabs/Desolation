@@ -6,6 +6,21 @@ const Users = new mongoose.Schema({
         required: true,
         default: 0
     },
+    owned_nfts: [{
+
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Nfts',
+        default: null,
+
+    }],
+    owned_items: [{
+
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Items',
+        default: null,
+
+    }],
+
     account_type: {
         type: Number,
         required: true,
