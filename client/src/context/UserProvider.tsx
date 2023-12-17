@@ -7,7 +7,7 @@ import {Center, ChakraProvider, Heading, VStack} from '@chakra-ui/react'
 import {useAnchorWallet, useConnection, useWallet} from '@solana/wallet-adapter-react'
 import Cookies from "js-cookie"
 import {useEffect, useState} from 'react'
-import Home from "@/layouts/home"
+import Login from "@/layouts/Login"
 
 export function UserProvider({
                                children
@@ -42,7 +42,7 @@ export function UserProvider({
 
   return (
     (!connected) ? (
-      <Home/>
+      <Login/>
     ) : (
       <>
         {children}

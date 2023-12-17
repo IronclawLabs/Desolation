@@ -7,9 +7,15 @@ import {RectAreaLightHelper} from 'three/addons/helpers/RectAreaLightHelper.js'
 import {RectAreaLightUniformsLib} from 'three/addons/lights/RectAreaLightUniformsLib.js'
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js'
 
+
+export const globalHelper = {
+  connected: false,
+  shouldLoadMap: false
+}
 export default class Room extends Component {
   initialized = false
   canvasCont = createRef()
+  connected = false
 
   componentWillUnmount() {
     window.removeEventListener('resize', () => {
@@ -23,7 +29,7 @@ export default class Room extends Component {
     if (this.initialized) return
     this.initialized = true
 
-    let connected = true
+
 
     const parentNode = this.canvasCont.current
     let camera, scene, renderer, controls
@@ -44,7 +50,7 @@ export default class Room extends Component {
 
     init()
     render()
-    animate()
+    animate(this.connected)
 
     function init() {
       configInit()
@@ -103,7 +109,7 @@ export default class Room extends Component {
       mouse.y = (event.clientY - windowHalf.x)
     }
 
-    function animate() {
+    function animate(connected) {
       target.x = (1 - mouse.x) * 0.0005
       target.y = (1 - mouse.y) * 0.0005
 
@@ -124,7 +130,7 @@ export default class Room extends Component {
           flyingLight1.intensity -= 2
           flyingLight2.intensity -= 2
         } else {
-          // goto Map URL
+          globalHelper.shouldLoadMap = true
         }
 
         //console.log(camera.position.z);
@@ -725,6 +731,7 @@ export default class Room extends Component {
     }
 
     function render() {
+
       let time = performance.now() * 0.0005
 
       flyingLight1.position.x = (Math.sin(time * 0.6) * 3)
@@ -766,6 +773,8 @@ export default class Room extends Component {
   }
 
   render() {
+    this.connected = globalHelper.connected
+
     return (
       <>
         <div className={styles.canvasContainer} ref={this.canvasCont}/>

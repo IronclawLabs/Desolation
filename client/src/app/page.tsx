@@ -13,6 +13,8 @@ import Loading from "@components/loading"
 import Navs from "@components/navs"
 import MenuItem from "@components/MenuItem"
 import {useWallet} from "@solana/wallet-adapter-react"
+import {globalHelper} from "@components/room"
+import Login from "@/layouts/Login"
 
 
 const zones = [
@@ -189,15 +191,24 @@ export default function Home() {
   const [menuVisible, setMenuVisible] = useState(false)
   const [chatVisible, setChatVisible] = useState(false)
   const {publicKey, connected, signIn} = useWallet()
+  const [ticker, setTicker] = useState(0)
+
+  useEffect(() => {
+    globalHelper.connected = connected
+  }, [connected])
 
 
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
-  })
+    if (globalHelper.shouldLoadMap)
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 3000)
+    setInterval(() => {
+      setTicker(prev => prev+1)
+    }, 100)
+  }, [ticker])
 
   useEffect(() => {
     function detectTransparency(el: HTMLImageElement, x: any, y: any) {
@@ -239,144 +250,145 @@ export default function Home() {
   }, [])
 
   return (
-    <VStack>
-      <Loading isLoading={isLoading}></Loading>
+    globalHelper.shouldLoadMap ?
       <VStack>
-        <WalletButton></WalletButton>
+        <Loading isLoading={isLoading}></Loading>
+        <VStack>
+          <WalletButton></WalletButton>
 
-      </VStack>
-      <Box display={"flex"} w={1900} h={970} className={"bg-cover bg-center relative justify-center"}
-           backgroundImage={`url("${require("@assets/bg.png").default.src}")`}>
-        <div className={"w-[70%] h-[70%] scale-[1] translate-y-[50px]  relative flex items-center justify-center"}>
-          <img className={"absolute"} src={require("@assets/flames.png").default.src}/>
-          <img className={"absolute"}  src={require("@assets/clouds.png").default.src}/>
+        </VStack>
+        <Box display={"flex"} w={1900} h={970} className={"bg-cover bg-center relative justify-center"}
+             backgroundImage={`url("${require("@assets/bg.png").default.src}")`}>
+          <div className={"w-[70%] h-[70%] scale-[1] translate-y-[50px]  relative flex items-center justify-center"}>
+            <img className={"absolute"} src={require("@assets/flames.png").default.src}/>
+            <img className={"absolute"} src={require("@assets/clouds.png").default.src}/>
 
-          {
-            zones.map((zone, index) => <Zone key={index} index={index} isHover={hoverIndex === index} zone={zone}/>)
-          }
+            {
+              zones.map((zone, index) => <Zone key={index} index={index} isHover={hoverIndex === index} zone={zone}/>)
+            }
 
-          <div className={"absolute top-[73%]"}>
-            <Navs/>
-          </div>
-        </div>
-
-
-        <div className={"flex justify-center items-end fixed bottom-0 w-full gap-[10px]"}>
-
-
-          <MenuItem label={"User Profile"} image={require("@assets/characters.png").default.src}/>
-          <MenuItem label={"characters"} image={require("@assets/inventory.png").default.src}/>
-          <MenuItem label={"inventory"} image={require("@assets/leaderboard.png").default.src}/>
-          <MenuItem label={"game documents"} image={require("@assets/social.png").default.src}/>
-        </div>
-        <div className={"fixed bottom-[30px] left-[30px]"}>
-          <div id="side-panel" className={"ui panel !h-[300px] mb-[30px] " + (menuVisible ? " " : "hide ")}>
-            <div className="content">
-              <div className={""}>
-                Profile
-              </div>
-              <div className={""}>
-                Asset Manager
-              </div>
-              <div className={""}>
-                Connect Socials
-              </div>
-              <div className={""}>
-                Log Out
-              </div>
-
+            <div className={"absolute top-[73%]"}>
+              <Navs/>
             </div>
           </div>
 
 
-          <div onClick={() => {
-            setMenuVisible(prev => !prev)
-          }} className={"cursor-pointer flex gap-[20px] items-center justify-center"}>
-            <img className={"w-[70px] h-[70px] bg-[#5865F2] rounded-full"}
-                 src={require("@assets/profile.png").default.src}/>
-            <div className={"ui panel orbitron gap-[10px] p-[10px]"}>
-              <div className={"content"}>
-                <div>Wallet</div>
-                <div className={"font-[12px]"}>{publicKey && (publicKey.toString().substring(0, 20) + "...")}</div>
-              </div>
+          <div className={"flex justify-center items-end fixed bottom-0 w-full gap-[10px]"}>
 
+
+            <MenuItem label={"User Profile"} image={require("@assets/characters.png").default.src}/>
+            <MenuItem label={"characters"} image={require("@assets/inventory.png").default.src}/>
+            <MenuItem label={"inventory"} image={require("@assets/leaderboard.png").default.src}/>
+            <MenuItem label={"game documents"} image={require("@assets/social.png").default.src}/>
+          </div>
+          <div className={"fixed bottom-[30px] left-[30px]"}>
+            <div id="side-panel" className={"ui panel !h-[300px] mb-[30px] " + (menuVisible ? " " : "hide ")}>
+              <div className="content">
+                <div className={""}>
+                  Profile
+                </div>
+                <div className={""}>
+                  Asset Manager
+                </div>
+                <div className={""}>
+                  Connect Socials
+                </div>
+                <div className={""}>
+                  Log Out
+                </div>
+
+              </div>
             </div>
+
+
+            <div onClick={() => {
+              setMenuVisible(prev => !prev)
+            }} className={"cursor-pointer flex gap-[20px] items-center justify-center"}>
+              <img className={"w-[70px] h-[70px] bg-[#5865F2] rounded-full"}
+                   src={require("@assets/profile.png").default.src}/>
+              <div className={"ui panel orbitron gap-[10px] p-[10px]"}>
+                <div className={"content"}>
+                  <div>Wallet</div>
+                  <div className={"font-[12px]"}>{publicKey && (publicKey.toString().substring(0, 20) + "...")}</div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
 
-        </div>
-
-        <div className={"fixed bottom-[30px] right-[30px] w-[400px]"}>
-          <div id="side-panel" className={"ui panel !h-[300px] mb-[30px] " + (chatVisible ? " " : "hide ")}>
-            <div className="content">
-              <div className={"flex items-center gap-[20px]"}>
-                <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
-                     src={require("@assets/profile.png").default.src}/>
-                <div className={"flex flex-col gap-[5px]"}>
-                  <div>
-                    Foreson
-                  </div>
-                  <div className={"text-[12px] text-[#fff]"}>
-                    LOREM IPSUM LOREM IPSUM LOREM
-                  </div>
-                </div>
-              </div>
-
-              <div className={"flex items-center gap-[20px]"}>
-                <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
-                     src={require("@assets/profile.png").default.src}/>
-                <div className={"flex flex-col gap-[5px]"}>
-                  <div>
-                    Foreson
-                  </div>
-                  <div className={"text-[12px] text-[#fff]"}>
-                    LOREM IPSUM LOREM IPSUM LOREM
+          <div className={"fixed bottom-[30px] right-[30px] w-[400px]"}>
+            <div id="side-panel" className={"ui panel !h-[300px] mb-[30px] " + (chatVisible ? " " : "hide ")}>
+              <div className="content">
+                <div className={"flex items-center gap-[20px]"}>
+                  <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
+                       src={require("@assets/profile.png").default.src}/>
+                  <div className={"flex flex-col gap-[5px]"}>
+                    <div>
+                      Foreson
+                    </div>
+                    <div className={"text-[12px] text-[#fff]"}>
+                      LOREM IPSUM LOREM IPSUM LOREM
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className={"flex items-center gap-[20px]"}>
-                <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
-                     src={require("@assets/profile.png").default.src}/>
-                <div className={"flex flex-col gap-[5px]"}>
-                  <div>
-                    Foreson
-                  </div>
-                  <div className={"text-[12px] text-[#fff]"}>
-                    LOREM IPSUM LOREM IPSUM LOREM
+                <div className={"flex items-center gap-[20px]"}>
+                  <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
+                       src={require("@assets/profile.png").default.src}/>
+                  <div className={"flex flex-col gap-[5px]"}>
+                    <div>
+                      Foreson
+                    </div>
+                    <div className={"text-[12px] text-[#fff]"}>
+                      LOREM IPSUM LOREM IPSUM LOREM
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className={"flex items-center gap-[20px]"}>
-                <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
-                     src={require("@assets/profile.png").default.src}/>
-                <div className={"flex flex-col gap-[5px]"}>
-                  <div>
-                    Foreson
-                  </div>
-                  <div className={"text-[12px] text-[#fff]"}>
-                    LOREM IPSUM LOREM IPSUM LOREM
+                <div className={"flex items-center gap-[20px]"}>
+                  <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
+                       src={require("@assets/profile.png").default.src}/>
+                  <div className={"flex flex-col gap-[5px]"}>
+                    <div>
+                      Foreson
+                    </div>
+                    <div className={"text-[12px] text-[#fff]"}>
+                      LOREM IPSUM LOREM IPSUM LOREM
+                    </div>
                   </div>
                 </div>
-              </div>
 
+                <div className={"flex items-center gap-[20px]"}>
+                  <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
+                       src={require("@assets/profile.png").default.src}/>
+                  <div className={"flex flex-col gap-[5px]"}>
+                    <div>
+                      Foreson
+                    </div>
+                    <div className={"text-[12px] text-[#fff]"}>
+                      LOREM IPSUM LOREM IPSUM LOREM
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
-          </div>
 
 
-          <div onClick={() => {
-            setChatVisible(prev => !prev)
-          }} className={"cursor-pointer flex gap-[20px] items-center justify-center"}>
-            <div className={"ui panel orbitron gap-[10px] p-[10px]"}>
-              <div className={"content"}>
-                <div>Chat</div>
+            <div onClick={() => {
+              setChatVisible(prev => !prev)
+            }} className={"cursor-pointer flex gap-[20px] items-center justify-center"}>
+              <div className={"ui panel orbitron gap-[10px] p-[10px]"}>
+                <div className={"content"}>
+                  <div>Chat</div>
+                </div>
+
               </div>
-
             </div>
-          </div>
 
-        </div>
-      </Box>
-    </VStack>
+          </div>
+        </Box>
+      </VStack> : <Login/>
   )
 }

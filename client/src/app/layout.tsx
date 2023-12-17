@@ -30,9 +30,7 @@ export default function RootLayout({
     <body className={inter.className}>
     <SolWallet>
       <UIProvider>
-        <UserProvider>
-          {children}
-        </UserProvider>
+        {children}
       </UIProvider>
     </SolWallet>
     </body>

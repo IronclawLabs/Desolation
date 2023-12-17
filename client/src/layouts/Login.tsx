@@ -9,7 +9,7 @@ import Header from "@components/header";
 import Footer from "@components/footer";
 import LoginLightbox from "@components/login-lightbox";
 
-export default function Home() {
+export default function Login() {
     return (
         <>
             <Head>
