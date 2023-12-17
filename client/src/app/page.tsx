@@ -247,6 +247,9 @@ export default function Home() {
       <Box display={"flex"} w={1900} h={970} className={"bg-cover bg-center relative justify-center"}
            backgroundImage={`url("${require("@assets/bg.png").default.src}")`}>
         <div className={"w-[70%] h-[70%] scale-[1] translate-y-[50px]  relative flex items-center justify-center"}>
+          <img className={"absolute"} src={require("@assets/flames.png").default.src}/>
+          <img className={"absolute"}  src={require("@assets/clouds.png").default.src}/>
+
           {
             zones.map((zone, index) => <Zone key={index} index={index} isHover={hoverIndex === index} zone={zone}/>)
           }
