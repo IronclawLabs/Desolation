@@ -15,7 +15,7 @@ const sendSol = async (
   ) => {
     const priceInSelectedChain = amountInSol
     const connection = new Connection(
-      "https://autumn-bold-market.solana-mainnet.discover.quiknode.pro/751f1fb6d3293954183cd89f16bfab596f3ecc72",
+      `https://rpc.hellomoon.io/${process.env.HELLO_MOON_API_KEY}`, // REPLACE process.env.HELLOMOON_API_KEY with your API key
       "confirmed"
     );
   

@@ -6,11 +6,8 @@ export enum AccountType {
 }
 
 export enum PaymentType {
-  basic
-}
-export const CultTypeText = {
-  0:"Basic"
-  
+  deposit,
+  withdraw,
 }
 
 export const AccountTypeText = {

@@ -14,7 +14,8 @@ const domain = () => {
   
   
     //payment
-    post_validate_payment:`${domain()}/payment/validate`,
+    post_validate_payment:`${domain()}/user/payment/validate`,
+    post_withdraw_token:`${domain()}/user/payment/withdraw`,
   
     //user
     put_create_user:`${domain()}/user`,

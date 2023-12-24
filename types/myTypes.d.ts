@@ -64,6 +64,14 @@ export interface postValidateTokenPaymentBody{
   tx_sender:string
 }
 
+export interface postWithdrawTokenBody{
+  target_wallet:string,
+  amount:number
+}
+
+export interface TokenPaymentRecepitRes{
+  vault_wallet:string,
+}
 
 export interface putCreateUserBody{
   wallet_id:ResponseMessage
