@@ -7,11 +7,14 @@ const Payments = new mongoose.Schema({
         index:true,
         unique:true,
     },
+    from_wallet: {
+        type: String,
+        required: true,
+    },
     payment_type: {
         type: Number,
         required: true,
         enum: PaymentType,
-        default: PaymentType.basic
     },
     is_active: {
         type: Boolean,

@@ -1,5 +1,6 @@
 import { AccountType } from "@sharedtypes/enums"
 import mongoose from "mongoose"
+import { token } from "morgan"
 const Users = new mongoose.Schema({
     token_balance: {
         type: Number,
@@ -43,12 +44,7 @@ const Users = new mongoose.Schema({
         default: 0
     
     },
-    balance_table_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Balances',
-        default: null,
     
-    },
     is_active: {
         type: Boolean,
         required: true,

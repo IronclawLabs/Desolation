@@ -20,15 +20,14 @@ export const postValidateTokenPayment = async (req: ExtendedRequest, res: Respon
         
         if(!isPaymentValid(txData,tx_sender)) throw new Error("Invalid payment");
         const givenTokenBalance =  await getGivenTokenBalance(txData);
-        //is given token balance allowed?
         
         paymentsModel.create({payment_signature:tx_signature})
         
-        //perform payment result
+        dbUser.token_balance  += Number(givenTokenBalance);
         
         await dbUser.save()
         const resBody = {message:ResponseMessage.paymentValidated,permission:true} as postResponse
-        res.status(200).send(txData)
+        res.status(200).send(resBody)
 
     } catch (error) {
         console.log(error);

@@ -4,7 +4,8 @@ import web3, { Connection, GetVersionedTransactionConfig, TransactionResponse } 
 export const fetchTxSignature = async (txHash: string): Promise<TransactionResponse|undefined> => {
     try {
         const connection = new Connection(
-            `https://rpc-devnet.hellomoon.io/${process.env.HELLO_MOON_API_KEY}`, // REPLACE process.env.HELLOMOON_API_KEY with your API key
+            `https://rpc.hellomoon.io/${process.env.HELLO_MOON_API_KEY}`, // REPLACE process.env.HELLOMOON_API_KEY with your 
+            "confirmed"
           );
           const config: GetVersionedTransactionConfig = {
             commitment: "confirmed",
