@@ -1,13 +1,18 @@
-import {Zone} from "@sharedtypes/AllTypes"
+import {ZoneType} from "@sharedtypes/AllTypes"
+import {useContext} from "react"
+import {GlobalStateContext} from "@/App.tsx"
 
 interface ZoneProps {
-  zone: Zone,
+  zone: ZoneType,
   isHover: boolean,
   index: number,
 }
 
 export default function Zone({index, zone, isHover}: ZoneProps) {
 
+  const {globalState, setGlobal} = useContext(GlobalStateContext)
+
+  isHover = isHover && globalState.currentModal === ""
 
   return <div className={"absolute "} style={{
     left: zone.left,
@@ -19,11 +24,12 @@ export default function Zone({index, zone, isHover}: ZoneProps) {
          src={zone.image}
          className={"zone  cursor-pointer transition-all duration-75 " + (isHover ? " brightness-125" : "")}
     />
-    <div className={"absolute ui panel z-[3] !w-[200px] !h-[100px] "} style={{
-      transform: zone.transform,
-      transformOrigin: "left center"
-    }}>
-			<div className={"content orbitron text-[14px] " + (isHover ? " brightness-125" : "brightness-90")}>
+    <div className={"absolute ui panel z-[3] !w-[200px] !h-[100px] " + (isHover ? " opacity-100" : "opacity-0")}
+         style={{
+           transform: zone.transform,
+           transformOrigin: "left center"
+         }}>
+      <div className={"content orbitron text-[14px] "}>
         <div className={"!mt-[15px]"}>
           NFTs on mission: <span className={"text-[#fff]"}>150</span>
         </div>
@@ -34,7 +40,7 @@ export default function Zone({index, zone, isHover}: ZoneProps) {
 
       </div>
     </div>
-    <div className={"absolute z-[4]"} style={zone.lineStyle}>
+    <div className={"absolute z-[4] " + (isHover ? " opacity-100" : "opacity-0")} style={zone.lineStyle}>
 
     </div>
   </div>

@@ -12,7 +12,6 @@ export default function LoginLightbox() {
     const {connection} = useConnection();
     const {publicKey, sendTransaction} = useWallet();
 
-    console.log(connection);
 
     const connect = () => {
         setVisible(true)

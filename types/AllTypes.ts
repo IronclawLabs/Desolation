@@ -1,4 +1,4 @@
-export interface Zone {
+export interface ZoneType {
   image: string,
 
   left: string,
