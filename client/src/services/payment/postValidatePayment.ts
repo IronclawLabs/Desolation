@@ -1,13 +1,11 @@
-"use server"
-import { cookies } from "next/headers";
 import links from "../../data/links";
-import { DbUser, postValidateTokenPaymentBody } from "@sharedtypes/myTypes";
+import {  postValidateTokenPaymentBody } from "@sharedtypes/myTypes";
 
 export async function postValidateTokenPayment (tx_signature:string,tx_sender:string){
   try {
-    const nextCookies = cookies();
-    const userJwt = nextCookies.get("user_jwt");
-    if(!userJwt) throw Error
+
+
+    
 
     const res = await fetch(links.post_validate_payment, {
       credentials: "include",
@@ -15,7 +13,7 @@ export async function postValidateTokenPayment (tx_signature:string,tx_sender:st
         method:"POST",
         body:JSON.stringify({tx_sender,tx_signature} as postValidateTokenPaymentBody),
         headers: {
-          Authorization:`Bearer ${userJwt.value}`
+
         },
     });
 
@@ -25,5 +23,5 @@ export async function postValidateTokenPayment (tx_signature:string,tx_sender:st
   } catch (error) {
     return {};
   }
-};
+}
 

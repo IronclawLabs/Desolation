@@ -1,13 +1,9 @@
 "use server"
-import { cookies } from "next/headers";
 import links from "../../data/links";
-import { DbUser, TokenPaymentRecepitRes, postWithdrawTokenBody } from "@sharedtypes/myTypes";
+import {TokenPaymentRecepitRes } from "@sharedtypes/myTypes";
 
 export async function getTokenPaymentRecepit (){
   try {
-    const nextCookies = cookies();
-    const userJwt = nextCookies.get("user_jwt");
-    if(!userJwt) throw Error
 
     const res = await fetch(links.post_withdraw_token, {
       credentials: "include",
@@ -15,7 +11,6 @@ export async function getTokenPaymentRecepit (){
         method:"GET",
       
         headers: {
-          Authorization:`Bearer ${userJwt.value}`
         },
     });
 
@@ -25,5 +20,5 @@ export async function getTokenPaymentRecepit (){
   } catch (error) {
     return {} as TokenPaymentRecepitRes;
   }
-};
+}
 
