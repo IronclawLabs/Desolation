@@ -15,6 +15,22 @@
   pointer-events: none;
 }
 
+.panel-button {
+  background-color: #5865F2;
+  transition: all 0.3s;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.panel-button:hover {
+  background-color: #4B5FD1;
+  color: white;
+}
+
 .soften {
   -webkit-filter: blur(.025em);
   -moz-filter: blur(.025em);

@@ -233,7 +233,7 @@ export default function GlobalMap() {
   return <>
     <Loading isLoading={isLoading}></Loading>
     <ModalsContainer/>
-    <Box display={"flex"} w={1900} h={970} className={"bg-cover bg-center relative justify-center"}
+    <Box display={"flex"} w={"100dvw"} h={"100dvh"} className={"bg-cover bg-center relative justify-center"}
          backgroundImage={`url("${getAssetUrl("./src/assets/bg.png")}")`}>
       <div className={"w-[70%] h-[70%] scale-[1] translate-y-[50px]  relative flex items-center justify-center"}>
         <img className={"absolute"} src={getAssetUrl("./src/assets/flames.png")}/>
@@ -262,16 +262,16 @@ export default function GlobalMap() {
           <div className="content">
             <div onClick={() => {
               setGlobal({currentModal: "profile"})
-            }} className={""}>
+            }} className={"panel-button"}>
               Profile
             </div>
-            <div className={""}>
+            <div className={"panel-button"}>
               Asset Manager
             </div>
-            <div className={""}>
+            <div className={"panel-button"}>
               Connect Socials
             </div>
-            <div className={""}>
+            <div className={"panel-button"}>
               Log Out
             </div>
 
@@ -298,7 +298,7 @@ export default function GlobalMap() {
       <div className={"fixed bottom-[30px] right-[30px] w-[400px]"}>
         <div id="side-panel" className={"ui panel !h-[300px] mb-[30px] " + (chatVisible ? " " : "hide ")}>
           <div className="content">
-            <div className={"flex items-center gap-[20px]"}>
+            <div className={"flex items-center gap-[20px] "}>
               <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
                    src={getAssetUrl("./src/assets/profile.png")}/>
               <div className={"flex flex-col gap-[5px]"}>
@@ -311,7 +311,7 @@ export default function GlobalMap() {
               </div>
             </div>
 
-            <div className={"flex items-center gap-[20px]"}>
+            <div className={"flex items-center gap-[20px] "}>
               <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
                    src={getAssetUrl("./src/assets/profile.png")}/>
               <div className={"flex flex-col gap-[5px]"}>
@@ -324,7 +324,7 @@ export default function GlobalMap() {
               </div>
             </div>
 
-            <div className={"flex items-center gap-[20px]"}>
+            <div className={"flex items-center gap-[20px] "}>
               <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
                    src={getAssetUrl("./src/assets/profile.png")}/>
               <div className={"flex flex-col gap-[5px]"}>
@@ -337,7 +337,7 @@ export default function GlobalMap() {
               </div>
             </div>
 
-            <div className={"flex items-center gap-[20px]"}>
+            <div className={"flex items-center gap-[20px] "}>
               <img className={"w-[40px] h-[40px] bg-[#5865F2] rounded-full"}
                    src={getAssetUrl("./src/assets/profile.png")}/>
               <div className={"flex flex-col gap-[5px]"}>
