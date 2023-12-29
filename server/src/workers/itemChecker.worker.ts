@@ -13,7 +13,7 @@ const client = new RestClient("b6239bbc-222e-490d-a4b1-faf2b3066e08");//TODO: mo
  * It retrieves active missions from the database, fetches the current NFT owners,
  * and checks if all the participants in each mission own the required NFTs.
  * If any participant is missing a required NFT, the mission is deactivated.
- * 
+ * 64630011720
  * @returns {Promise<void>} A promise that resolves once the item checking process is complete.
  */
 export default async function itemChecker() {

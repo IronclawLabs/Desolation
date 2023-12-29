@@ -13,7 +13,6 @@ const isUser = (req: ExtendedRequest, res: Response, next: NextFunction) => {
         throw new Error("Authentication failed");
       }
       // Authentication succeeded
-      // databaseden clickeri çek eğer yoksa databasede error at varsa assign et
       req.dbUser = user;
       next();
     } catch (error) {

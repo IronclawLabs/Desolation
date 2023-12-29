@@ -4,7 +4,6 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import passport from "passport";
 import dotenv from "dotenv"
@@ -17,12 +16,9 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 import authRoute from "./routes/auth.route";
 import adminRoute from "./routes/admin.route";
 import publicRoute from "./routes/public.route";
-import paymentRoute from "./routes/payment.route";
 import userRoute from "./routes/user.route";
-import './strategies/discordStrategy.strategy';
 import './strategies/userJwtStrategy.strategy';
 //middleware import
-import isAuthorized from './middleware/isAuthorized.middleware';
 import isAdmin from './middleware/isAdmin.middleware';
 import isActive from '@middleware/isActive.middleware';
 import isValid from '@middleware/isValid.middleware';
@@ -30,8 +26,8 @@ import http from "http"
 import helmet from 'helmet';
 import eventEmitter from './eventEmitter';
 import sendSol from './utils/sendSol';
-import isUser from '@middleware/isUser.middleware';
 import startWorker from '@workers/startWorker.worker';
+import isUser from '@middleware/isUser.middleware';
 
 
 
@@ -59,13 +55,9 @@ const main = () => {
     extended: true
   }));
   app.use(bodyParser.json());
-
-
-
  
   // Passport
   app.use(passport.initialize());
-  app.use(passport.session());
 
 
   const connect = async () => {
@@ -80,7 +72,7 @@ const main = () => {
   app.use('/auth', authRoute);
   app.use('/public',publicRoute);
   app.use('/user',userRoute); //middlewares are insde
-  app.use('/admin', isAuthorized, isValid, isActive, isAdmin, adminRoute);
+  app.use('/admin',isUser, isActive, isAdmin, adminRoute);
   startWorker();
   
   server.listen(PORT, () => {
