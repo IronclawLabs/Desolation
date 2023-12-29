@@ -1,6 +1,5 @@
 //@ts-nocheck
 //TODO: fix typescript errors
-"use client"
 import {VStack} from '@chakra-ui/react'
 
 import {createContext, ReactNode, useEffect, useRef, useState} from "react"
@@ -9,6 +8,7 @@ import {globalHelper} from "@components/room.tsx"
 import GlobalMap from "@/layouts/Map.tsx"
 import Login from "@/layouts/Login.tsx"
 import {staticGlobal} from "@/init.ts"
+import {CookiesProvider} from "react-cookie"
 
 
 // const helperObj : {currentZone: any, previousZone: any} = {
@@ -38,9 +38,11 @@ const GlobalStateProvider = ({children}: { children: ReactNode }) => {
   }
 
   return (
-    <GlobalStateContext.Provider value={{globalState, setGlobal}}>
-      {children}
-    </GlobalStateContext.Provider>
+    <CookiesProvider defaultSetOptions={{path: '/'}}>
+      <GlobalStateContext.Provider value={{globalState, setGlobal}}>
+        {children}
+      </GlobalStateContext.Provider>
+    </CookiesProvider>
   )
 }
 

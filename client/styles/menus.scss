@@ -11,7 +11,7 @@
 /* ---- Common Styling ----------------- */
 
 .hide {
-  opacity:0;
+  opacity: 0;
   pointer-events: none;
 }
 
@@ -24,6 +24,7 @@
   border-radius: 5px;
   margin-bottom: 10px;
   cursor: pointer;
+  color: white;
 }
 
 .panel-button:hover {

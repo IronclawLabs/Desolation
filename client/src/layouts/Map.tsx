@@ -252,7 +252,7 @@ export default function GlobalMap() {
       <div className={"flex justify-center items-end fixed bottom-0 w-full gap-[10px]"}>
 
 
-        <MenuItem label={"User Profile"} image={getAssetUrl("./src/assets/characters.png")}/>
+        <MenuItem onClick={() => {setGlobal({currentModal:"profile"})}} label={"User Profile"} image={getAssetUrl("./src/assets/characters.png")}/>
         <MenuItem label={"characters"} image={getAssetUrl("./src/assets/inventory.png")}/>
         <MenuItem label={"inventory"} image={getAssetUrl("./src/assets/leaderboard.png")}/>
         <MenuItem label={"game documents"} image={getAssetUrl("./src/assets/social.png")}/>

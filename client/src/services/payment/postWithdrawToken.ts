@@ -1,29 +1,13 @@
-"use server"
-import { cookies } from "next/headers";
-import links from "../../data/links";
-import { DbUser, postWithdrawTokenBody } from "@sharedtypes/myTypes";
+import links from "../../data/links"
+import {DbUser, postWithdrawTokenBody} from "@sharedtypes/myTypes"
+import {apiTransport} from "@services/apiTransport.ts"
 
-export async function postWithdrawToken (target_wallet:string,amount:number){
+export async function postWithdrawToken(target_wallet: string, amount: number) {
   try {
-    const nextCookies = cookies();
-    const userJwt = nextCookies.get("user_jwt");
-    if(!userJwt) throw Error
 
-    const res = await fetch(links.post_withdraw_token, {
-      credentials: "include",
-        cache: "no-store",
-        method:"POST",
-        body:JSON.stringify(({target_wallet,amount} as postWithdrawTokenBody)),
-        headers: {
-          Authorization:`Bearer ${userJwt.value}`
-        },
-    });
-
-    const data = await res.json() as DbUser;
-
-    return data;
+    return (await apiTransport(links.post_withdraw_token, "POST", {target_wallet, amount} as postWithdrawTokenBody) as DbUser)
   } catch (error) {
-    return {} as DbUser;
+    return {} as DbUser
   }
-};
+}
 
