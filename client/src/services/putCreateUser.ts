@@ -3,7 +3,6 @@ import { putCreateUserBody } from "@sharedtypes/myTypes";
 import {apiTransport} from "@services/apiTransport.ts"
 
 export async function putCreateUser(wallet_id:string){
-  "use server"
   try {
     
     const body = {wallet_id} as putCreateUserBody

@@ -5,5 +5,8 @@ import commonjs from '@rollup/plugin-commonjs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    'process.env.ANCHOR_BROWSER': true
+},
   plugins: [react(), tsconfigPaths(), commonjs()],
 })

@@ -12,11 +12,10 @@ import sendSol from "@utils/sendSol";
 
 export const getTokenPaymentRecepit = async (req: ExtendedRequest, res: Response) => {
     try {
-        
-      
        
         //send vault wallet token address
-        const resBody = {vault_wallet:process.env.VAULT_WALLET} as TokenPaymentRecepitRes
+        
+        const resBody = {vault_wallet:process.env.TOKEN_VAULT_ATA} as TokenPaymentRecepitRes
         res.status(200).send(resBody)
 
     } catch (error) {

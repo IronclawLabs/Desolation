@@ -28,6 +28,7 @@ export const putCreateUser = async (req: Request, res: Response) => {
             httpOnly: false,//TODO:change to true whenever its on main
             secure: true,
             expires: new Date(Date.now() + 86400000), // 1 day from now
+            path: '/',
         };
 
         res.cookie('user_jwt', token, cookieOptions);

@@ -19,6 +19,7 @@ export const apiTransport = async (
     }
 
     const response = await axios({
+      withCredentials:true,
       method: method,
       url: BACKEND_URL + url,
       headers: config.headers,

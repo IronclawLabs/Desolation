@@ -1,11 +1,6 @@
 const domain = () => {
-    if (process.env.NODE_ENV == "production") return "https://clickapp-production.up.railway.app";
+    //if ("" == "production") return "https://clickapp-production.up.railway.app";
     return "http://localhost:5002";
-  };
-  
-  const wssdomain = () => {
-    if (process.env.NODE_ENV == "production") return "wss://clickapp-production.up.railway.app";
-    return "ws://localhost:5002";
   };
   
   const links = {

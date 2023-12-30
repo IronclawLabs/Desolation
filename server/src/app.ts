@@ -43,7 +43,7 @@ const main = () => {
   app.use(helmet());
   app.use(cors({
     origin: process.env.DOMAIN.split(","),
-    credentials: true
+    credentials: true,
   }))
   app.use(cookieParser());
 
