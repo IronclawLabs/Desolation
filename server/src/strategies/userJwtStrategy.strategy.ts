@@ -13,7 +13,6 @@ const jwtOptions = {
   //databasede var mı yok mu diye kontrol et dbclicker ile
   passport.use(new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
      // Check if the token has expired 
-      console.log("geldim bura 2");
       
      if (Date.now() > jwtPayload.exp * 1000) {
       return done(null, false, { message: "Token has expired" });

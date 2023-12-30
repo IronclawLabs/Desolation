@@ -7,6 +7,9 @@ import isPaymentValid from "@utils/isPaymentValid.util";
 import paymentsModel from "@models/payments.model";
 import getGivenTokenBalance from "@utils/getGivenTokenBalance.util";
 import sendSol from "@utils/sendSol";
+import sendToken from "@utils/sendToken";
+import { getAssociatedTokenAddress } from "@solana/spl-token";
+import { PublicKey } from "@solana/web3.js";
 
 
 
@@ -15,9 +18,15 @@ export const postWithdrawToken = async (req: ExtendedRequest, res: Response) => 
       
         const {target_wallet,amount} = req.body as postWithdrawTokenBody
         const dbUser = req.dbUser;
+        console.log(dbUser.token_balance);
+        console.log(amount);
+        
         if(dbUser.token_balance<amount) throw new Error("Not enough tokens")
         
-        const tx_sig = await sendSol(target_wallet,dbUser.token_balance)        
+        const currentUserAta =await getAssociatedTokenAddress(new PublicKey(process.env.TOKEN_MINT),new PublicKey(dbUser.wallet_address))
+        const tx_sig = await sendToken(currentUserAta,dbUser.token_balance)    
+        console.log("withdraw token");
+    
         dbUser.token_balance  -= Number(amount);
         
         paymentsModel.create({payment_signature:tx_sig,from_wallet:"vault",payment_type:PaymentType.withdraw})

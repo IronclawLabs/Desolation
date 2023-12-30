@@ -1,6 +1,6 @@
 
 import { fetchTxSignature } from "@services/fetchTxSignature.service";
-import { ResponseMessage } from "@sharedtypes/enums";
+import { PaymentType, ResponseMessage } from "@sharedtypes/enums";
 import { postResponse, postValidateTokenPaymentBody } from "@sharedtypes/myTypes";
 import { Response, Request } from "express";
 import isPaymentValid from "@utils/isPaymentValid.util";
@@ -17,11 +17,11 @@ export const postValidateTokenPayment = async (req: ExtendedRequest, res: Respon
         
         const txData = await fetchTxSignature(tx_signature);
         if(!txData) throw new Error("Invalid signature");
-        
+        if(tx_sender !== dbUser.wallet_address) throw new Error("Invalid sender");
         if(!isPaymentValid(txData,tx_sender)) throw new Error("Invalid payment");
         const givenTokenBalance =  await getGivenTokenBalance(txData);
         
-        paymentsModel.create({payment_signature:tx_signature})
+        paymentsModel.create({from_wallet:tx_sender,payment_signature:tx_signature,payment_type:PaymentType.deposit,amount:givenTokenBalance})
         
         dbUser.token_balance  += Number(givenTokenBalance);
         

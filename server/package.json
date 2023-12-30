@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@hellomoon/api": "^1.17.4",
+    "@solana/spl-token": "^0.3.9",
     "@solana/web3.js": "^1.87.3",
     "@types/morgan": "^1.9.4",
     "alchemy-sdk": "^2.9.2",

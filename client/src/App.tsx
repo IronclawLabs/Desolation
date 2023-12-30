@@ -18,6 +18,7 @@ import { getTokenPaymentRecepit } from './services/payment/getTokenPaymentReceip
 import { createTransferInstruction, getAssociatedTokenAddress, TOKEN_PROGRAM_ID } from '@solana/spl-token'
 import { Connection, PublicKey, sendAndConfirmRawTransaction, sendAndConfirmTransaction, Transaction } from '@solana/web3.js'
 import { AnchorProvider } from '@project-serum/anchor'
+import { get } from 'node_modules/axios/index.d.cts'
 
 
 // const helperObj : {currentZone: any, previousZone: any} = {
@@ -81,7 +82,6 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
 
 //   useEffect(() => {
 //     const temp = async () => {
-//       console.log("geldim aga");
 
 //       if (!publicKey) return;
 //       putCreateUser(publicKey?.toBase58());
@@ -124,7 +124,8 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
 //           )
 //         );
 //        const signature =  await provider.sendAndConfirm(transaction)
-
+//         console.log(signature);
+        
 
 //         postValidateTokenPayment(signature, publicKey?.toBase58())
 //       }}>deposit token</Button>
@@ -137,6 +138,7 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
 //       />
 //       <Button color={"white"} onClick={() => {
 //         if (!publicKey) return;
+
 //         postWithdrawToken(publicKey?.toBase58(), number2)
 //       }}>withdraw token</Button>
 //     </VStack>
